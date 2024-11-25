@@ -2,3 +2,4 @@ streamlit
 openai
 folium
 youtube_transcript_api
+pypdf
