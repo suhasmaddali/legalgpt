@@ -4,3 +4,4 @@ folium
 youtube_transcript_api
 pypdf
 PyPDF2
+plotly
