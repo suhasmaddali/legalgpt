@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bc1396cfcf7b0eaed3c48b82a3b825e9 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_bc1396cfcf7b0eaed3c48b82a3b825e9" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_bc1396cfcf7b0eaed3c48b82a3b825e9 = L.map(
+                "map_bc1396cfcf7b0eaed3c48b82a3b825e9",
+                {
+                    center: [33.6407, -83.4427],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 7,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_6358f8ff2474b8b4e53c4af89eaa1b1b = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_6358f8ff2474b8b4e53c4af89eaa1b1b.addTo(map_bc1396cfcf7b0eaed3c48b82a3b825e9);
+        
+    
+            var marker_dde2adf0770c0bef222a2e95b8dcf23f = L.marker(
+                [33.8184, -84.1381],
+                {}
+            ).addTo(map_bc1396cfcf7b0eaed3c48b82a3b825e9);
+        
+    
+            var icon_e110c7128ed981f3fca6b70639c5f283 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_dde2adf0770c0bef222a2e95b8dcf23f.setIcon(icon_e110c7128ed981f3fca6b70639c5f283);
+        
+    
+        var popup_ff47cc309e966da524afc409a80633e6 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_ce5a269c5eac3c2860a9d4dcad36905f = $(`<div id="html_ce5a269c5eac3c2860a9d4dcad36905f" style="width: 100.0%; height: 100.0%;"><strong>District at Parkview</strong><br>1-3 bedroom apartments with modern amenities in Stone Mountain.<br><a href="https://www.zillow.com/b/district-at-parkview-stone-mountain-ga-5Xj8b2/" target="_blank">View Details</a></div>`)[0];
+                popup_ff47cc309e966da524afc409a80633e6.setContent(html_ce5a269c5eac3c2860a9d4dcad36905f);
+            
+        
+
+        marker_dde2adf0770c0bef222a2e95b8dcf23f.bindPopup(popup_ff47cc309e966da524afc409a80633e6)
+        ;
+
+        
+    
+    
+            var marker_c093774fcd7df16bc334de2953f764a4 = L.marker(
+                [33.9519, -83.3576],
+                {}
+            ).addTo(map_bc1396cfcf7b0eaed3c48b82a3b825e9);
+        
+    
+            var icon_f5ee02f9029b550ac367462e20c9b993 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_c093774fcd7df16bc334de2953f764a4.setIcon(icon_f5ee02f9029b550ac367462e20c9b993);
+        
+    
+        var popup_6b611c2a51a0a5dc7b5851c821cb8d8f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c4045beee6968108cc64c5e8419f0cf7 = $(`<div id="html_c4045beee6968108cc64c5e8419f0cf7" style="width: 100.0%; height: 100.0%;"><strong>Georgia Green</strong><br>2-bedroom units near the University of Georgia.<br><a href="https://www.zillow.com/b/georgia-green-athens-ga-5Xj8b3/" target="_blank">View Details</a></div>`)[0];
+                popup_6b611c2a51a0a5dc7b5851c821cb8d8f.setContent(html_c4045beee6968108cc64c5e8419f0cf7);
+            
+        
+
+        marker_c093774fcd7df16bc334de2953f764a4.bindPopup(popup_6b611c2a51a0a5dc7b5851c821cb8d8f)
+        ;
+
+        
+    
+    
+            var marker_58dcb0bf105c47c5eac0b8f2ef07266c = L.marker(
+                [33.8101, -84.2386],
+                {}
+            ).addTo(map_bc1396cfcf7b0eaed3c48b82a3b825e9);
+        
+    
+            var icon_50d919977f965d85169480c899949eeb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_58dcb0bf105c47c5eac0b8f2ef07266c.setIcon(icon_50d919977f965d85169480c899949eeb);
+        
+    
+        var popup_4f59438f4e0e0204f03e450eb3b8e1c4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_942ea4dbe2ae368be90613ab6394a98b = $(`<div id="html_942ea4dbe2ae368be90613ab6394a98b" style="width: 100.0%; height: 100.0%;"><strong>The Ellis Apartments</strong><br>1-4 bedroom apartments with fitness center and pool.<br><a href="https://www.apartments.com/the-ellis-apartments-clarkston-ga/" target="_blank">View Details</a></div>`)[0];
+                popup_4f59438f4e0e0204f03e450eb3b8e1c4.setContent(html_942ea4dbe2ae368be90613ab6394a98b);
+            
+        
+
+        marker_58dcb0bf105c47c5eac0b8f2ef07266c.bindPopup(popup_4f59438f4e0e0204f03e450eb3b8e1c4)
+        ;
+
+        
+    
+    
+            var marker_7c9c8cf63c961af4e0c18526f0b987a6 = L.marker(
+                [33.0362, -85.0319],
+                {}
+            ).addTo(map_bc1396cfcf7b0eaed3c48b82a3b825e9);
+        
+    
+            var icon_6417fed019d72bc4b55b5ede0b1eee9f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_7c9c8cf63c961af4e0c18526f0b987a6.setIcon(icon_6417fed019d72bc4b55b5ede0b1eee9f);
+        
+    
+        var popup_1aa0d446c6a3e408428512034b20de93 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_9cf7bb582bbac22ba7c49a285d75d4e9 = $(`<div id="html_9cf7bb582bbac22ba7c49a285d75d4e9" style="width: 100.0%; height: 100.0%;"><strong>Prose LaGrange</strong><br>1-2 bedroom units with modern finishes and amenities.<br><a href="https://www.apartments.com/prose-lagrange-lagrange-ga/" target="_blank">View Details</a></div>`)[0];
+                popup_1aa0d446c6a3e408428512034b20de93.setContent(html_9cf7bb582bbac22ba7c49a285d75d4e9);
+            
+        
+
+        marker_7c9c8cf63c961af4e0c18526f0b987a6.bindPopup(popup_1aa0d446c6a3e408428512034b20de93)
+        ;
+
+        
+    
+</script>
+</html>
