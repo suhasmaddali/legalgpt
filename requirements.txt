@@ -85,3 +85,4 @@ whisper==1.1.10
 xyzservices==2024.9.0
 yarl==1.18.0
 youtube-transcript-api==0.6.3
+streamlit-mic-recorder
