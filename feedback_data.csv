@@ -1,8 +1,6 @@
 Page,Feedback,Status
 Home,"We kindly request your assistance in testing the application and providing valuable feedback. Please follow the instructions below:
 
-Navigate to the Feedback Tab within the application.
-Test the application thoroughly, exploring all functionalities and features.
 Add your inputs in the message, including:
 Comments: Share your general observations and experiences.
 Feedback: Highlight areas that meet expectations and areas for improvement.
@@ -24,3 +22,9 @@ Your insights are crucial for refining and improving the application. Thank you 
 Chat,"Functionality Improvements: Suggest enhancements to existing features or new features that can improve the application.
 Objects: Specify any additional objects or elements you feel should be included.
 Your insights are crucial for refining and improving the application. Thank you for your time and support!",Implemented Successfully
+Home,This application is great. There is a good improvement in the product,New
+Home,"This application is great. There is a good improvement in the product
+There are some things which do not work",New
+Home,"This application is great. There is a good improvement in the product
+There are some things which do not work
+This would ensure we are able to get good results. ",New

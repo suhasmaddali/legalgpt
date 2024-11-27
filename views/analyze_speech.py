@@ -1,55 +1,96 @@
 import streamlit as st
-import numpy as np
-from scipy.io import wavfile
-import matplotlib.pyplot as plt
+from streamlit_mic_recorder import mic_recorder
+from openai import OpenAI
+from gtts import gTTS
+import tempfile
+import os
+import base64
 
-# Title and description
-st.title("Audio Analysis Application")
-st.write("Upload a `.wav` audio file to analyze its properties and get insights.")
+# Initialize OpenAI client
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-# File uploader
-audio_file = st.file_uploader("Upload Audio File", type=["wav"])
+st.title("Record your situtation")
+# Streamlit app title
+st.markdown("Record your problem and I will give authentic legal advise.")
 
-if audio_file is not None:
-    # Read audio file
+# Initialize session state
+if "openai_model" not in st.session_state:
+    st.session_state["openai_model"] = "gpt-3.5-turbo"
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Function to transcribe audio
+def transcribe_audio(client, audio_path):
+    with open(audio_path, "rb") as audio_file:
+        transcript = client.audio.transcriptions.create(
+            model="whisper-1",
+            file=audio_file
+        )
+    return transcript.text
+
+# Function to convert text to speech and play it
+def text_to_speech(text):
+    tts = gTTS(text=text, lang='en')
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio_file:
+        tts.save(temp_audio_file.name)
+        temp_audio_path = temp_audio_file.name
+
+    # Read the audio file and encode it to base64
+    with open(temp_audio_path, "rb") as audio_file:
+        audio_bytes = audio_file.read()
+        audio_base64 = base64.b64encode(audio_bytes).decode()
+
+    # Create an audio HTML element with autoplay
+    audio_html = f"""
+    <audio autoplay="true" controls="controls" style="display:none;">
+        <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3" />
+    </audio>
+    """
+    st.markdown(audio_html, unsafe_allow_html=True)
+
+    # Clean up temporary file
+    os.remove(temp_audio_path)
+
+audio = mic_recorder()
+
+if audio:
+    # Save the recorded audio to a temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_audio_file:
+        temp_audio_file.write(audio['bytes'])
+        temp_audio_path = temp_audio_file.name
+
+    st.audio(temp_audio_path, format="audio/wav")
+
+    # Automatically transcribe audio and interact with the LLM
     try:
-        sample_rate, audio_data = wavfile.read(audio_file)
-        st.success("Audio file uploaded successfully!")
+        transcription = transcribe_audio(client, temp_audio_path)
         
-        # Ensure the data is mono
-        if len(audio_data.shape) == 2:
-            st.warning("Stereo detected. Using only one channel for analysis.")
-            audio_data = audio_data[:, 0]
+        # Add the transcription as a user message
+        additional_message = "Give tips based on this conversation with landlord and tenant to save their time and money"
+        enhanced_prompt = transcription + " " + additional_message
+        # st.session_state.messages.append({"role": "user", "content": transcription})
+        st.session_state.messages.append({"role": "user", "content": enhanced_prompt})
+        
+        # Get the assistant's response
+        stream = client.chat.completions.create(
+            model=st.session_state["openai_model"],
+            messages=[
+                {"role": m["role"], "content": m["content"]}
+                for m in st.session_state.messages
+            ],
+            stream=True,
+        )
+        response = st.write_stream(stream)
+        
+        text_to_speech(response)
 
-        # Insights
-        duration = len(audio_data) / sample_rate
-        st.write(f"**Sampling Rate:** {sample_rate} Hz")
-        st.write(f"**Duration:** {duration:.2f} seconds")
-        st.write(f"**Number of Samples:** {len(audio_data)}")
-        st.write(f"**Amplitude Range:** {audio_data.min()} to {audio_data.max()}")
-
-        # Plot the waveform
-        st.subheader("Waveform")
-        time_axis = np.linspace(0, duration, num=len(audio_data))
-        plt.figure(figsize=(10, 4))
-        plt.plot(time_axis, audio_data, label="Waveform")
-        plt.xlabel("Time (seconds)")
-        plt.ylabel("Amplitude")
-        plt.title("Audio Waveform")
-        plt.legend()
-        st.pyplot(plt)
-
-        # Frequency spectrum
-        st.subheader("Frequency Spectrum")
-        freq_axis = np.fft.rfftfreq(len(audio_data), 1 / sample_rate)
-        fft_magnitude = np.abs(np.fft.rfft(audio_data))
-        plt.figure(figsize=(10, 4))
-        plt.plot(freq_axis, fft_magnitude, label="Frequency Spectrum")
-        plt.xlabel("Frequency (Hz)")
-        plt.ylabel("Magnitude")
-        plt.title("Frequency Spectrum")
-        plt.legend()
-        st.pyplot(plt)
+        # Add the assistant's response to the chat history
+        st.session_state.messages.append({"role": "assistant", "content": response})
 
     except Exception as e:
-        st.error(f"An error occurred while processing the audio file: {e}")
+        st.error(f"An error occurred during transcription or response generation: {e}")
+
+    # Clean up temporary file
+    os.remove(temp_audio_path)
+
