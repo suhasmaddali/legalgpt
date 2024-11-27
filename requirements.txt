@@ -6,3 +6,5 @@ pypdf
 PyPDF2
 plotly
 pandas
+scipy
+matplotlib
