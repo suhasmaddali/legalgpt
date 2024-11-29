@@ -7,7 +7,9 @@ import os
 import base64
 
 # Initialize OpenAI client
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+openai_api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=openai_api_key)
 
 st.title("Record your situtation")
 # Streamlit app title

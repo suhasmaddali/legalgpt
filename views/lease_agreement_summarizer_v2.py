@@ -3,6 +3,7 @@ from PyPDF2 import PdfReader
 from openai import OpenAI
 import base64
 from io import BytesIO
+import os
 
 # Page Configuration
 st.set_page_config(
@@ -11,8 +12,8 @@ st.set_page_config(
     layout="wide",
 )
 
-# Initialize OpenAI Client
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+openai_api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=openai_api_key)
 
 # Initialize Session States
 if "openai_model" not in st.session_state:
